@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 12:50:35 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/05/25 15:27:03 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:54:58 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,18 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		point_to_shift = point_to_shift->next;
 	}
 }
+
+// void	ft_lstiter(t_list *lst, void (*f)(int))
+// {
+// 	t_list	*point_to_shift;
+
+// 	point_to_shift = lst;
+// 	while (point_to_shift)
+// 	{
+// 		(*f)(point_to_shift->content);
+// 		point_to_shift = point_to_shift->next;
+// 	}
+// }
 // int	main(void)
 // {
 // 	t_list		*elem;

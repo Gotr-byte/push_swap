@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/07 20:45:22 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/08 15:52:44 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void ft_print_node(void	*content)
+void ft_print_node(int content)
 {
-	printf ("%s\n", content);
+	printf ("%d\n", content);
 }
 
 void delete (void * content)
@@ -74,44 +74,100 @@ void del_pos(t_list **head, int position)
 // swap first two positions of a linked list
 void ft_swap_a(t_list	**head)
 {
-	t_list	*tmp;
-	t_list	*curr;
-	if(*head == NULL || curr->next == NULL)
-		printf("Lists are empty");
-	curr = *head->next;
-	tmp = *head->next;
-	*head->next = curr->next;
-	curr->next = tmp;
+	t_list	*currX;
+	t_list	*currY;
+    t_list	*temp;
+	
+	currX = *head;
+	currY = *head;
+    if (currX == NULL || currY == NULL || currY->next == NULL || currX->next == NULL)
+        return;
+    currY = currY->next;
+	temp = currY->next;
+    currY->next = currX;
+    currX->next = temp;
+	*head = currY;
 }
 
-#include "./libft/libft.h"
-int	main(void)
+// void ft_push_b(t_list **stack_a, t_list **stack_b)
+// {
+// 	// pushes the first element from stack a to stack b
+// 	// if stack b doesnt exits create stack_b
+// 	// creates copy in stack b and links it accordingly
+// 	// deletes node in stack a
+// 	t_list new_node;
+
+// 	new_node = *stack_a;
+// 	// stack_b = NULL;
+
+// }
+
+t_list	*ft_lstnew_int(int content)
 {
-	t_list	*ptr;
-	t_list 	*head;
-	t_list 	*first;
-	t_list 	*second;
-	t_list 	*second_head;
-	t_list 	*third;
 	t_list	*tmp;
-	int 	position;
 
-	head = ft_lstnew("1\n");
-	first = ft_lstnew("2\n");
-	ft_lstadd_back (&head, first);
-	second = ft_lstnew("3\n");
-	ft_lstadd_back (&head, second);
-	second_head = ft_lstnew("4\n");
-	ft_lstadd_front (&head, second_head);
-	third = ft_lstnew("5\n");
-	ft_lstadd_back(&second_head, third);
-	printf ("Before deletion: \n");
-	ft_lstiter(head, &ft_print_node);
-	position = 1;
-	del_pos(&head, position);
-	ptr = second_head;
-	printf ("After deletion: \n");
-	ft_lstiter(head, &ft_print_node);
-	ft_swap_a(&head);
-	printf ("After swap a: \n");
+	tmp = (t_list *)malloc(sizeof(t_list));
+	if (!tmp)
+		return (NULL);
+	if (!content)
+	{
+		free(tmp);
+		return(NULL);
+	}
+	if (tmp)
+	{
+		tmp->content = content;
+		tmp->next = NULL;
+	}
+	return (tmp);
 }
+
+
+int	main(int ac, char **av)
+{
+	if (ac > 2)
+	{
+	// t_list	*ptr;
+	t_list 	*head;
+	// t_list 	*first;
+	// t_list 	*second;
+	// t_list 	*second_head;
+	// t_list 	*third;
+	// int 	position;
+	int		i;
+
+	i = 1;
+	head = NULL;
+	while (i < ac)
+	{
+		ft_lstadd_back(&head, ft_lstnew_int(ft_atoi(av[i])));
+		i++;
+	}
+
+	// head = ft_lstnew("1\n");
+	// first = ft_lstnew("2\n");
+	// ft_lstadd_back (&head, first);
+	// second = ft_lstnew("3\n");
+	// ft_lstadd_back (&head, second);
+	// second_head = ft_lstnew("4\n");
+	// ft_lstadd_front (&head, second_head);
+	// third = ft_lstnew("5\n");
+	// ft_lstadd_back(&second_head, third);
+	// printf ("Before deletion: \n");
+	// ft_lstiter(head, &ft_print_node);
+	// position = 1;
+	// del_pos(&head, position);
+	// ptr = second_head;
+	// printf ("After deletion: \n");
+	// ft_lstiter(head, &ft_print_node);
+	// ft_swap_a(&head);
+	// printf ("After swap a: \n");
+	ft_lstiter(head, &ft_print_node);
+	}
+	else
+	{
+		printf("Wrong input");
+		return(2);
+	}
+}
+
