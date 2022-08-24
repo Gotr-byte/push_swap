@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/22 16:13:03 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/24 11:31:28 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,6 +312,13 @@ void sort_three(Node *lst)
 	}
 
 }
+
+// void is_sorted(Node **stack)
+// {
+		// Node	*i;
+		// Node	*j;
+
+// }
 
 
 int	main(int ac, char **av)
