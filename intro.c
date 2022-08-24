@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/08 21:01:20 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:13:03 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 // list resulting of the successive applications of
 // the function ’f’. The ’del’ function is used to
 // delete the content of a node if needed.
+// for some reason segfaults with 0 as input
+
 
 #include "./libft/libft.h"
 #include "push_swap.h"
@@ -38,7 +40,7 @@ void ft_print_node(int content)
 	printf ("%d\n", content);
 }
 
-void delete (void * content)
+void delete (char * content)
 {
 	printf("The following content has been deleted: %s", content);
 }
@@ -72,13 +74,14 @@ void del_pos(Node **head, int position)
 		current = NULL;
 	}
 }
-// swap first two positions of a linked list
+
 void ft_swap_a(Node	**head)
 {
 	Node	*currX;
 	Node	*currY;
     Node	*temp;
 	
+	printf("Swapped list a\n");
 	currX = *head;
 	currY = *head;
     if (currX == NULL || currY == NULL || currY->next == NULL || currX->next == NULL)
@@ -140,11 +143,11 @@ Node	*ft_lstnew_int(int content)
 	tmp = (Node *)malloc(sizeof(Node));
 	if (!tmp)
 		return (NULL);
-	if (!content)
-	{
-		free(tmp);
-		return(NULL);
-	}
+	// if (!content)
+	// {
+	// 	free(tmp);
+	// 	return(NULL);
+	// }
 	if (tmp)
 	{
 		tmp->content = content;
@@ -178,45 +181,164 @@ Node	*local_lstlast(Node *lst)
 	return (tmp);
 }
 
+Node	*local_lst_bef_last(Node *lst)
+{
+	Node	*tmp;
+	Node	*tmp_bef;
+	
+	tmp = lst;
+	if (!lst)
+		return (NULL);
+	while (tmp->next != NULL)
+	{
+		tmp_bef = tmp;
+		tmp_bef = tmp_bef->next;
+		if(tmp_bef->next == NULL)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (tmp);
+}
+
+
 void rot(Node **head)
 {
 	Node	*prev;
 	Node	*curr;
 	Node	*traverse;
 
-	// if (!*head)
-	// 	return ;
 	prev = *head;
 	curr = *head;
 	traverse = *head;
-	prev = local_lstlast(traverse);
+	traverse = traverse->next;
+	prev = local_lstlast(prev);
 	prev->next = curr;
 	curr->next = NULL;
-	// prev = prev->next;
-	traverse = traverse->next;
 	*head = traverse;
 }
+
+void rev_rot(Node **head)
+{
+	Node	*prev;
+	Node	*curr;
+	Node	*traverse;
+
+	printf("rra\n");
+	prev = *head;
+	curr = *head;
+	traverse = *head;
+	traverse = local_lstlast(traverse);
+	prev = local_lst_bef_last(prev);
+	prev->next = NULL;
+	traverse->next = curr;
+	*head = traverse;
+}
+void sort_two(Node *lst)
+{
+	Node	*point_to_shift;
+	
+	point_to_shift = lst;
+	int	a;
+	int b;
+
+	a = point_to_shift->content;
+	// a = 0;
+	point_to_shift = point_to_shift->next;
+	b = point_to_shift->content;
+	if (a <= b)
+	{
+		local_lstiter(lst, &ft_print_node);
+		printf("Hi! It is all sorted :)\n");
+	}
+	if (a > b)
+	{
+		ft_swap_a(&lst);
+		printf("Swapped list a\n");
+		local_lstiter(lst, &ft_print_node);
+		printf("Hi! It is all sorted :)\n");
+	}
+}
+
+void sort_three(Node *lst)
+{
+	Node	*point_to_shift;
+	
+	point_to_shift = lst;
+	int	a;
+	int b;
+	int c;
+
+	a = point_to_shift->content;
+	point_to_shift = point_to_shift->next;
+	b = point_to_shift->content;
+	point_to_shift = point_to_shift->next;
+	c = point_to_shift->content;
+	if (a <= b && b <= c && c >= a)
+	{
+		local_lstiter(lst, &ft_print_node);
+		printf("Hi! It is all sorted :)\n");
+	}
+	else if (a < b && b > c && c >a)
+	{
+		ft_swap_a(&lst);
+		rot(&lst);
+		local_lstiter(lst, &ft_print_node);
+		printf("Hi! It is all sorted :)\n");
+	}
+	else if (a > b && b < c && c > a)
+	{
+		ft_swap_a(&lst);
+		local_lstiter(lst, &ft_print_node);
+		printf("Hi! It is all sorted :)\n");
+	}
+	else if (a < b && c < b && c < a)
+	{
+		rev_rot(&lst);
+		local_lstiter(lst, &ft_print_node);
+		printf("Hi! It is all sorted :)\n");
+	}
+	else if (a > b && b < c && c < a)
+	{
+		rot(&lst);
+		local_lstiter(lst, &ft_print_node);
+		printf("Hi! It is all sorted :)\n");
+	}
+	else if (a > b && b > c && c < a)
+	{
+		ft_swap_a(&lst);
+		rev_rot(&lst);
+		local_lstiter(lst, &ft_print_node);
+		printf("Hi! It is all sorted :)\n");
+	}
+
+}
+
 
 int	main(int ac, char **av)
 {
 	if (ac > 1)
 	{
 	Node 	*stack_a;
-	// Node	*stack_b;
 	int		i;
 
 	i = 1;
 	stack_a = NULL;
 	while (i < ac)
 	{
+		// printf("%d", ft_atoi(av[i]));
+		// break;
 		local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
 		i++;
 	}
-	printf("Before rot_a:\n");
-	local_lstiter(stack_a, &ft_print_node);
-	rot(&stack_a);
-	printf("After rot_a:\n");
-	local_lstiter(stack_a, &ft_print_node);
+	if (ac == 3)
+		sort_two(stack_a);
+	if (ac == 4)
+		sort_three(stack_a);
+	// printf("Before rrot_a:\n");
+	// local_lstiter(stack_a, &ft_print_node);
+	// rev_rot(&stack_a);
+	// printf("After rrot_a:\n");
+	// local_lstiter(stack_a, &ft_print_node);
 	}
 	else
 	{

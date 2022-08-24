@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/27 20:42:12 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/05/26 11:29:36 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/22 16:06:47 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 //val[3] - flag that shows there is a valid string with numbers
 
 #include "libft.h"
+#include "stdio.h"
 
 static int	ft_wh_space(char *str)
 {
@@ -57,7 +58,7 @@ int	ft_atoi(const char *str)
 }
 // int    main(void)
 // {
-// 	char* test_1 = "   		-11hgchg";
+// 	char* test_1 = "0";
 
 // 	printf("ft_atoi(%s): %d\n", test_1, ft_atoi(test_1)) ;
 // 	printf("atoi(%s): %d\n", test_1, atoi(test_1)) ;
