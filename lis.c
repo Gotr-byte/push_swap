@@ -40,7 +40,41 @@ int *ft_lis (int arr[], int n)
             if(arr[i] > arr[j] && lis[i] < lis[j] + 1)
             {
                 lis[i] = lis[j] + 1;
-                // break;
+            }
+            j++;
+        }
+        i++;
+    }
+    return (lis);
+}
+
+int *ft_lis (int arr[], int n)
+{
+    int *lis;
+    int i;
+    int    j;
+
+    lis = (int*)malloc (sizeof(int)*n);
+
+    // Initialises LIS values for all indexes
+    i = 0;
+
+    while (i < n)
+    {
+        lis[i] = 1;
+        i++;
+    }
+
+    j = 0;
+    i = 1;
+
+    while (i < n)
+    {
+        while (j < i)
+        {
+            if(arr[i] > arr[j] && lis[i] < lis[j] + 1)
+            {
+                lis[i] = lis[j] + 1;
             }
             j++;
         }

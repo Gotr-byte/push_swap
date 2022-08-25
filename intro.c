@@ -6,28 +6,18 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/24 11:31:28 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:19:16 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Function name ft_lstmap
-// Prototype Node *ft_lstmap(Node *lst, void *(*f)(void *),
-// void (*del)(void *));
-// Turn in files -
-// Parameters lst: The address of a pointer to a node.
-// f: The address of the function used to iterate on
-// the list.
-// del: The address of the function used to delete
-// the content of a node if needed.
-// Return value The new list.
-// NULL if the allocation fails.
-// External functs. malloc, free
-// Description Iterates the list ’lst’ and applies the function
-// ’f’ on the content of each node. Creates a new
-// list resulting of the successive applications of
-// the function ’f’. The ’del’ function is used to
-// delete the content of a node if needed.
-// for some reason segfaults with 0 as input
+
+//needs an is sorted function
+//needs cases when to use functions with most sorting prowess
+//we find the lis then it stays in stack a
+// put the other things in stack b
+//sort stack b
+//if there is a largest one we can rotate it to the end maybe
+// if we can put two in stack b and then rotate its good
 
 
 #include "./libft/libft.h"
@@ -143,11 +133,6 @@ Node	*ft_lstnew_int(int content)
 	tmp = (Node *)malloc(sizeof(Node));
 	if (!tmp)
 		return (NULL);
-	// if (!content)
-	// {
-	// 	free(tmp);
-	// 	return(NULL);
-	// }
 	if (tmp)
 	{
 		tmp->content = content;
@@ -320,37 +305,76 @@ void sort_three(Node *lst)
 
 // }
 
+Node *ft_lis (int n)
+{
+	Node 	*lis;
+	Node	*first;
+	Node	*second;
+    int i;
+	int	a;
+	int b;
+
+    i = 0;
+
+	lis->content = 1;
+	while (i < n)
+		{
+			local_lstadd_back(&lis, ft_lstnew_int(1));
+			i++;
+		}
+
+
+    j = 0;
+    i = 1;
+
+    while (i < n)
+    {
+        while (j < i)
+        {
+//             if(arr[i] > arr[j] && lis[i] < lis[j] + 1)
+//             {
+//                 lis[i] = lis[j] + 1;
+//             }
+//             j++;
+//         }
+//         i++;
+//     }
+    return (lis);
+}
+
+
 
 int	main(int ac, char **av)
 {
-	if (ac > 1)
-	{
-	Node 	*stack_a;
-	int		i;
+	// if (ac > 1)
+	// {
+	// Node 	*stack_a;
+	// int		i;
 
-	i = 1;
-	stack_a = NULL;
-	while (i < ac)
-	{
+	local_lstiter(ft_lis(5), &ft_print_node);
+	// i = 1;
+	// stack_a = NULL;
+	// while (i < ac)
+	// {
 		// printf("%d", ft_atoi(av[i]));
 		// break;
-		local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
-		i++;
-	}
-	if (ac == 3)
-		sort_two(stack_a);
-	if (ac == 4)
-		sort_three(stack_a);
+	// 	local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
+	// 	i++;
+	// }
+	// if (ac == 3)
+	// 	sort_two(stack_a);
+	// if (ac == 4)
+	// 	sort_three(stack_a);
 	// printf("Before rrot_a:\n");
 	// local_lstiter(stack_a, &ft_print_node);
 	// rev_rot(&stack_a);
 	// printf("After rrot_a:\n");
 	// local_lstiter(stack_a, &ft_print_node);
-	}
-	else
-	{
-		printf("Wrong input");
-		return(2);
-	}
+	// }
+	// else
+	// {
+	// 	printf("Wrong input");
+	// 	return(2);
+	// }
 }
 
