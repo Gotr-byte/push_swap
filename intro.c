@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/28 11:42:13 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/28 13:02:25 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,14 +338,6 @@ Node *ft_lis (Node** lst, int n)
 
     while (i < n)
     {
-                // printf("traverse: %d\n", traverse->content);
-				// printf("traverse next %d\n", traverse_next->content);
-				// printf("first %d\n", first->content + 1);
-				// printf("second %d\n", second->content);
-				// traverse->content = traverse->content + 1;
-				// traverse_next->content = traverse_next->content + 3;
-
-	// write(1, "toto", 4); 
 	j = 0;
 	first = *lst;
 	traverse = lis;
@@ -364,12 +356,6 @@ Node *ft_lis (Node** lst, int n)
 			traverse_next = traverse_next->next;
         	i++;
     }
-	// printf("traverse: %d\n", traverse->content);
-	// printf("traverse next %d\n", traverse_next->content+1);
-	// printf("first %d\n", first->content);
-	// printf("second %d\n", second->content);
-	local_lstiter(lis, &ft_print_node);
-	return (NULL);
 	return (lis);
 }
 
@@ -388,7 +374,7 @@ int	main(int ac, char **av)
 		local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
 		i++;
 	}
-	local_lstiter(ft_lis(&stack_a, 10), &ft_print_node);
+	local_lstiter(ft_lis(&stack_a, ac - 1), &ft_print_node);
 	// if (ac == 3)
 	// 	sort_two(stack_a);
 	// if (ac == 4)
