@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/25 16:19:16 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/28 11:07:55 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ Node	*ft_lstnew_int(int content)
 {
 	Node	*tmp;
 
-	tmp = (Node *)malloc(sizeof(Node));
+	// tmp = (Node*)malloc(sizeof(Node));
+	tmp = (Node*)malloc(sizeof(tmp));
 	if (!tmp)
 		return (NULL);
 	if (tmp)
@@ -305,62 +306,88 @@ void sort_three(Node *lst)
 
 // }
 
-Node *ft_lis (int n)
+// Node *ft_lis (int n)
+Node *ft_lis (Node** lst, int n)
 {
 	Node 	*lis;
 	Node	*first;
 	Node	*second;
+	Node	*traverse;
+	Node	*traverse_next;
     int i;
-	int	a;
-	int b;
+	int j;
 
     i = 0;
 
-	lis->content = 1;
+	// lis->content = 1;
+	lis = NULL;
 	while (i < n)
 		{
 			local_lstadd_back(&lis, ft_lstnew_int(1));
 			i++;
 		}
 
-
+	first = *lst;
+	second = *lst;
+	second = second->next;
+	traverse = lis;
+	traverse_next = lis;
+	traverse_next = traverse_next->next;
     j = 0;
     i = 1;
 
     while (i < n)
     {
+                // printf("traverse: %d\n", traverse->content);
+				// printf("traverse next %d\n", traverse_next->content);
+				// printf("first %d\n", first->content + 1);
+				// printf("second %d\n", second->content);
+				// traverse->content = traverse->content + 1;
+				// traverse_next->content = traverse_next->content + 3;
+
+	// write(1, "toto", 4); 
+	
+	
         while (j < i)
         {
-//             if(arr[i] > arr[j] && lis[i] < lis[j] + 1)
-//             {
-//                 lis[i] = lis[j] + 1;
-//             }
-//             j++;
-//         }
-//         i++;
-//     }
-    return (lis);
+            if((second->content > first->content) && (traverse_next->content < traverse->content + 1))
+            {
+				traverse_next->content = traverse->content + 1;
+            }
+				
+			first = first->next;
+			traverse = traverse->next;
+            j++;
+        }
+			second = second->next;
+			traverse_next = traverse_next->next;
+        	i++;
+    }
+	// printf("traverse: %d\n", traverse->content);
+	// printf("traverse next %d\n", traverse_next->content+1);
+	// printf("first %d\n", first->content);
+	// printf("second %d\n", second->content);
+	local_lstiter(lis, &ft_print_node);
+	return (NULL);
+	return (lis);
 }
 
-
-
 int	main(int ac, char **av)
+// int main(void)
 {
 	// if (ac > 1)
 	// {
-	// Node 	*stack_a;
-	// int		i;
+	Node 	*stack_a;
+	int		i;
 
-	local_lstiter(ft_lis(5), &ft_print_node);
-	// i = 1;
-	// stack_a = NULL;
-	// while (i < ac)
-	// {
-		// printf("%d", ft_atoi(av[i]));
-		// break;
-	// 	local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
-	// 	i++;
-	// }
+	i = 1;
+	stack_a = NULL;
+	while (i < ac)
+	{
+		local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
+		i++;
+	}
+	local_lstiter(ft_lis(&stack_a, 10), &ft_print_node);
 	// if (ac == 3)
 	// 	sort_two(stack_a);
 	// if (ac == 4)
