@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/28 11:07:55 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/28 11:42:13 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,9 @@ Node *ft_lis (Node** lst, int n)
 				// traverse_next->content = traverse_next->content + 3;
 
 	// write(1, "toto", 4); 
-	
+	j = 0;
+	first = *lst;
+	traverse = lis;
 	
         while (j < i)
         {
@@ -354,7 +356,6 @@ Node *ft_lis (Node** lst, int n)
             {
 				traverse_next->content = traverse->content + 1;
             }
-				
 			first = first->next;
 			traverse = traverse->next;
             j++;
