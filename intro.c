@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/28 13:02:25 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:04:22 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,42 @@
 //sort stack b
 //if there is a largest one we can rotate it to the end maybe
 // if we can put two in stack b and then rotate its good
+// need a is sorted function
 
 
 #include "./libft/libft.h"
 #include "push_swap.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+Node * insert(Node *head, int data)
+{
+	Node* temp;
+	Node *newP;
+	int key;
+	
+	newP = malloc(sizeof(Node));
+	newP->content = data;
+	newP->next= NULL;
+	key = data;	
+	
+	if (head == NULL || key < head->content)
+	{
+		newP->next = head;
+		head = newP;
+	}
+	else
+	{
+		temp = head;
+		while (temp->next != NULL && temp->next->content < key)
+		{
+			temp = temp->next;
+		}
+		newP->next = temp->next;
+		temp->next = newP;
+	}
+	return (head);
+}
 
 void ft_print_node(int content)
 {
@@ -124,8 +154,6 @@ void ft_push_b(Node **stack_a, Node **stack_b)
 	local_lstadd_back(stack_b, tmp);
 }
 
-
-
 Node	*ft_lstnew_int(int content)
 {
 	Node	*tmp;
@@ -141,7 +169,6 @@ Node	*ft_lstnew_int(int content)
 	}
 	return (tmp);
 }
-
 
 void	local_lstiter(Node *lst, void (*f)(int))
 {
@@ -186,7 +213,6 @@ Node	*local_lst_bef_last(Node *lst)
 	return (tmp);
 }
 
-
 void rot(Node **head)
 {
 	Node	*prev;
@@ -219,6 +245,7 @@ void rev_rot(Node **head)
 	traverse->next = curr;
 	*head = traverse;
 }
+
 void sort_two(Node *lst)
 {
 	Node	*point_to_shift;
@@ -374,7 +401,8 @@ int	main(int ac, char **av)
 		local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
 		i++;
 	}
-	local_lstiter(ft_lis(&stack_a, ac - 1), &ft_print_node);
+	local_lstiter(insert(stack_a, 11), &ft_print_node);
+	// local_lstiter(ft_lis(&stack_a, ac - 1), &ft_print_node);
 	// if (ac == 3)
 	// 	sort_two(stack_a);
 	// if (ac == 4)
