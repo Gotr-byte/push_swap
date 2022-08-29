@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/29 15:04:22 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:01:50 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 //if there is a largest one we can rotate it to the end maybe
 // if we can put two in stack b and then rotate its good
 // need a is sorted function
+// 
 
+[1, 2, 4, 3]
 
 #include "./libft/libft.h"
 #include "push_swap.h"
@@ -402,6 +404,7 @@ int	main(int ac, char **av)
 		i++;
 	}
 	local_lstiter(insert(stack_a, 11), &ft_print_node);
+
 	// local_lstiter(ft_lis(&stack_a, ac - 1), &ft_print_node);
 	// if (ac == 3)
 	// 	sort_two(stack_a);
