@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/08/29 17:01:50 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/08/30 10:00:13 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 // need a is sorted function
 // 
 
-[1, 2, 4, 3]
 
 #include "./libft/libft.h"
 #include "push_swap.h"
@@ -328,12 +327,35 @@ void sort_three(Node *lst)
 
 }
 
-// void is_sorted(Node **stack)
-// {
-		// Node	*i;
-		// Node	*j;
+//while each pair of elements is sorted the stack is sorted
 
-// }
+char *is_sorted(Node **stack)
+{
+	Node	*i;
+	Node	*j;
+	char*	sort_flag;
+	
+	sort_flag = "sorted";
+	i = (*stack);
+	j = (*stack);
+	j = j->next;
+	
+	while (1)
+	{
+		if(j->content == i->content)
+		{
+			sort_flag = "equals";
+			break ;
+		}
+		if(j->content < i->content)
+			sort_flag = "unsorted";
+		if(j->next == NULL)
+			break ;
+		j = j->next;
+		i = i->next;
+	}
+	return(sort_flag);	
+}
 
 // Node *ft_lis (int n)
 Node *ft_lis (Node** lst, int n)
@@ -403,7 +425,8 @@ int	main(int ac, char **av)
 		local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
 		i++;
 	}
-	local_lstiter(insert(stack_a, 11), &ft_print_node);
+	printf("The stack is: %s \n", is_sorted(&stack_a));
+	// local_lstiter(insert(stack_a, 11), &ft_print_node);
 
 	// local_lstiter(ft_lis(&stack_a, ac - 1), &ft_print_node);
 	// if (ac == 3)
