@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/01 10:08:02 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/01 15:25:26 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 //if there is a largest one we can rotate it to the end maybe
 // if we can put two in stack b and then rotate its good
 // need a is sorted function
-// 
+// could use subsequence
+// follow the tutorial with the bucket sort 
 
 
 #include "./libft/libft.h"
@@ -341,6 +342,7 @@ void sort_three(Node *lst)
 
 //while each pair of elements is sorted the stack is sorted
 
+// sort four can use the indexing for the first element which would be pushed to b then
 char *is_sorted(Node **stack)
 {
 	Node	*i;
