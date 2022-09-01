@@ -12,11 +12,11 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-
-typedef struct Nodes{
-	int content;
-	struct Nodes* next;
-}Node;
+#include "push_swap.h"
+// typedef struct Nodes{
+// 	int content;
+// 	struct Nodes* next;
+// }Node;
 
 Node *SortedMerge (Node *a, Node *b);
 void FrontBackSplit (Node *source, Node **frontRef, Node **backRef);
@@ -90,34 +90,34 @@ void printList(Node *node)
 	}
 }
 
-void push(Node **head_ref, int new_data)
-{
-	Node* new_node = (Node *)malloc(sizeof(Node));
+// void push(Node **head_ref, int new_data)
+// {
+// 	Node* new_node = (Node *)malloc(sizeof(Node));
 
-	new_node->content = new_data;
-	new_node->next = (*head_ref);
-	(*head_ref) = new_node;
-}
+// 	new_node->content = new_data;
+// 	new_node->next = (*head_ref);
+// 	(*head_ref) = new_node;
+// }
 
-int main()
-{
-	Node *res = NULL;
-	Node *a = NULL;
+// int main()
+// {
+// 	Node *res = NULL;
+// 	Node *a = NULL;
 
-	push(&a, 15);
-	push(&a, 10);
-	push(&a, 5);
-	push(&a, 11);
-	push(&a, 3);
-	push(&a, 2);
+// 	push(&a, 15);
+// 	push(&a, 10);
+// 	push(&a, 5);
+// 	push(&a, 11);
+// 	push(&a, 3);
+// 	push(&a, 2);
 
-	MergeSort(&a);
+// 	MergeSort(&a);
 
-	printf("Sorted Linked list is \n");
-	printList(a);
+// 	printf("Sorted Linked list is \n");
+// 	printList(a);
 
-	getchar();
+// 	getchar();
 
-	return (0);
+// 	return (0);
 
-}
+// }
