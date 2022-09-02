@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/02 12:38:15 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/02 13:09:38 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,18 +168,22 @@ void ft_push_b(Node **stack_a, Node **stack_b)
 
 void ft_push_a(Node **stack_a, Node **stack_b)
 {
-	Node	*tmp;
-	Node	*traverse;
+	Node *node_to_push;
 	
-	write (1, "pa\n", 3);
-	if (*stack_a == NULL)
+	if (!(*stack_a))
 		return ;
-	tmp = *stack_a;
-	traverse = *stack_a;
-	traverse = traverse->next;
-	*stack_a = traverse;
-	tmp->next = NULL;
-	local_lstadd_back(stack_b, tmp);
+	node_to_push = (*stack_a);
+	(*stack_a) = (*stack_a)->next; 
+	node_to_push->next = NULL;
+	if (!*stack_b)
+		(*stack_b) = node_to_push;
+	else
+	{
+		node_to_push->next = (*stack_b);
+		(*stack_b) = node_to_push;
+	}
+	node_to_push = NULL;
+	write (1, "pa\n", 3);
 }
 
 Node	*ft_lstnew_int(int content)
@@ -381,17 +385,51 @@ void sort_four(Node **lst)
 	if (stack_a->index == 4)
 	{
 		ft_push_b(&stack_a, &stack_b);
-		ft_push_b(&stack_a, &stack_b);
-		ft_push_b(&stack_a, &stack_b);
-		ft_push_b(&stack_a, &stack_b);
+		sort_three(&stack_a);
+		ft_push_a(&stack_b, &stack_a);
+		rot(&stack_a);
 		printf("stack a\n");
 		local_lstiter(stack_a, &ft_print_node);
 		printf("stack_b\n");
 		local_lstiter(stack_b, &ft_print_node);
 		return ;
+	}
+	if (stack_a->index == 2)
+	{
+		ft_push_b(&stack_a, &stack_b);
 		sort_three(&stack_a);
 		ft_push_a(&stack_b, &stack_a);
-		// rev_rot(&stack_a);
+		ft_swap_a(&stack_a);
+		printf("stack a\n");
+		local_lstiter(stack_a, &ft_print_node);
+		printf("stack_b\n");
+		local_lstiter(stack_b, &ft_print_node);
+		return ;
+	}
+		if (stack_a->index == 3)
+	{
+		ft_push_b(&stack_a, &stack_b);
+		sort_three(&stack_a);
+		rev_rot(&stack_a);
+		ft_push_a(&stack_b, &stack_a);
+		rot(&stack_a);
+		rot(&stack_a);
+		printf("stack a\n");
+		local_lstiter(stack_a, &ft_print_node);
+		printf("stack_b\n");
+		local_lstiter(stack_b, &ft_print_node);
+		return ;
+	}
+	if (stack_a->index == 1)
+	{
+		ft_push_b(&stack_a, &stack_b);
+		sort_three(&stack_a);
+		ft_push_a(&stack_b, &stack_a);
+		printf("stack a\n");
+		local_lstiter(stack_a, &ft_print_node);
+		printf("stack_b\n");
+		local_lstiter(stack_b, &ft_print_node);
+		return ;
 	}
 }
 //while each pair of elements is sorted the stack is sorted
