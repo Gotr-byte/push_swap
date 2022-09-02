@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/02 16:20:44 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:52:53 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@
 #include <stdlib.h>
 #include "linkedlistmerge.c"
 
-void	local_lstiter(Node *lst, void (*f)(int, int));
+void positions(Node **stack);
+void	local_lstiter(Node *lst, void (*f)(int, int, int));
 
 Node * insert(Node *head, int data)
 {
@@ -61,10 +62,11 @@ Node * insert(Node *head, int data)
 	return (head);
 }
 
-void ft_print_node(int content, int index)
+void ft_print_node(int content, int index, int position)
 {
 	printf ("%d\n", content);
 	printf ("%d\n", index);
+	printf ("%d\n", position);
 }
 
 void delete (char * content)
@@ -109,6 +111,23 @@ void ft_swap_a(Node	**head)
     Node	*temp;
 	
 	write(1, "sa\n", 3);
+	currX = *head;
+	currY = *head;
+    if (currX == NULL || currY == NULL || currY->next == NULL || currX->next == NULL)
+        return;
+    currY = currY->next;
+	temp = currY->next;
+    currY->next = currX;
+    currX->next = temp;
+	*head = currY;
+}
+void ft_swap_b(Node	**head)
+{
+	Node	*currX;
+	Node	*currY;
+    Node	*temp;
+	
+	write(1, "sb\n", 3);
 	currX = *head;
 	currY = *head;
     if (currX == NULL || currY == NULL || currY->next == NULL || currX->next == NULL)
@@ -202,14 +221,14 @@ Node	*ft_lstnew_int(int content)
 	return (tmp);
 }
 
-void	local_lstiter(Node *lst, void (*f)(int, int))
+void	local_lstiter(Node *lst, void (*f)(int, int, int))
 {
 	Node	*point_to_shift;
 
 	point_to_shift = lst;
 	while (point_to_shift)
 	{
-		(*f)(point_to_shift->content, point_to_shift->index);
+		(*f)(point_to_shift->content, point_to_shift->index, point_to_shift->position);
 		point_to_shift = point_to_shift->next;
 	}
 }
@@ -302,6 +321,33 @@ void sort_two(Node *lst)
 		ft_swap_a(&lst);
 		// local_lstiter(lst, &ft_print_node);
 		// printf("Hi! It is all sorted :)\n");
+	}
+}
+
+void sort_two_b(Node **lst)
+{
+	Node	*point_to_shift;
+	
+	point_to_shift = *lst;
+	int	a;
+	int b;
+
+	a = point_to_shift->content;
+	// a = 0;
+	point_to_shift = point_to_shift->next;
+	b = point_to_shift->content;
+	if (a <= b)
+	{
+		// local_lstiter(lst, &ft_print_node);
+		// printf("Hi! It is all sorted :)\n");
+		ft_swap_b(lst);
+		return ;
+	}
+	if (a > b)
+	{
+		// local_lstiter(lst, &ft_print_node);
+		// printf("Hi! It is all sorted :)\n");
+		return ;
 	}
 }
 
@@ -433,7 +479,86 @@ void sort_four(Node **lst)
 	}
 }
 //while each pair of elements is sorted the stack is sorted
+int	find_pos_one(Node **lst)
+{
+	Node	*stack_a;
 
+	stack_a = *lst;
+	while(1)
+	{	
+		if(stack_a->index == 1)
+			return(stack_a->position);
+		if(stack_a->next == NULL)
+			return(-1);
+		stack_a = stack_a->next;
+	}
+}
+
+int	find_pos_two(Node **lst)
+{
+	Node	*stack_a;
+
+	stack_a = *lst;
+	while(1)
+	{	
+		if(stack_a->index == 2)
+			return(stack_a->position);
+		if(stack_a->next == NULL)
+			return(-1);
+		stack_a = stack_a->next;
+	}
+}
+
+void sort_five(Node **lst)
+{
+	Node *stack_a;
+	Node *stack_b;
+	int  sent;
+
+	sent = 2;
+	stack_a = *lst;
+	stack_b = NULL;
+	
+	while(1)
+	{
+		if(sent == 0)
+			break ;
+		if(stack_a->index == 1)
+			{
+				ft_push_b(&stack_a, &stack_b);
+				sent--;
+			}
+		if(sent == 1)
+			if (stack_a->index == 2)
+			{
+				ft_push_b(&stack_a, &stack_b);
+				sent--;
+			}
+		if (find_pos_one(&stack_a) < 4 && find_pos_one(&stack_a) > 0)
+			{
+				rot(&stack_a);
+				positions(&stack_a);	
+			}
+		else if (find_pos_one(&stack_a) >= 4 && find_pos_one(&stack_a) > 0)
+			{
+				rev_rot(&stack_a);
+				positions(&stack_a);	
+			}
+		if (find_pos_two(&stack_a) < 4 && find_pos_one(&stack_a) < 0)
+			{
+				rot(&stack_a);
+				positions(&stack_a);
+			}
+		else if (find_pos_two(&stack_a) >= 4 && find_pos_one(&stack_a) < 0)
+			{
+				rev_rot(&stack_a);
+				positions(&stack_a);
+			}
+	}
+	sort_three(&stack_a);
+	ft_push_a(&stack_b, &stack_a);
+	ft_push_a(&stack_b, &stack_a);	
+}
 // sort four can use the indexing for the first element which would be pushed to b then
 char *is_sorted(Node **stack)
 {
@@ -473,6 +598,23 @@ void indexes(Node **stack)
 	while (1)
 	{
 		stack_index->index = i;
+		i++;
+		if(stack_index->next == NULL)
+			break ;
+		stack_index = stack_index->next;
+	}
+}
+
+void positions(Node **stack)
+{
+	Node *stack_index;
+	int 	i;
+	
+	stack_index = *stack;
+	i = 1;
+	while (1)
+	{
+		stack_index->position = i;
 		i++;
 		if(stack_index->next == NULL)
 			break ;
@@ -577,6 +719,11 @@ int	main(int ac, char **av)
 		local_lstadd_back(&sorted, ft_lstnew_int(ft_atoi(av[i])));
 		i++;
 	}
+	indexes(&stack_a);
+	MergeSort(&sorted);
+	indexes(&sorted);
+	con_to_index(&stack_a, &sorted);
+	positions(&stack_a);
 	//printf("The stack is: %s \n", is_sorted(&stack_a));
 	// local_lstiter(insert(stack_a, 11), &ft_print_node);
 
@@ -585,12 +732,10 @@ int	main(int ac, char **av)
 		sort_two(stack_a);
 	if (ac == 4)
 		sort_three(&stack_a);
-	indexes(&stack_a);
-	MergeSort(&sorted);
-	indexes(&sorted);
-	con_to_index(&stack_a, &sorted);
 	if (ac == 5)
 		sort_four(&stack_a);
+	if (ac == 6)
+		sort_five(&stack_a);
 	// local_lstiter(stack_a, &ft_print_node);
 	// printf("Before rrot_a:\n");
 	// local_lstiter(stack_a, &ft_print_node);

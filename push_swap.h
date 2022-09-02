@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:55:43 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/02 11:38:13 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:43:07 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ typedef struct Nodes
 {
 	int				content;
 	int				index;
+	int				position;
 	//lis chonk index 
 	// index_tmp;
 	struct Nodes	*next;
