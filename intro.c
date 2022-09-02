@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/02 13:09:38 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:20:44 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void ft_swap_a(Node	**head)
 	Node	*currY;
     Node	*temp;
 	
-	printf("sa\n");
+	write(1, "sa\n", 3);
 	currX = *head;
 	currY = *head;
     if (currX == NULL || currY == NULL || currY->next == NULL || currX->next == NULL)
@@ -251,7 +251,7 @@ void rot(Node **head)
 	Node	*curr;
 	Node	*traverse;
 
-	printf("ra\n");
+	write(1, "ra\n", 3);
 	prev = *head;
 	curr = *head;
 	traverse = *head;
@@ -268,7 +268,7 @@ void rev_rot(Node **head)
 	Node	*curr;
 	Node	*traverse;
 
-	printf("rra\n");
+	write(1, "rra\n", 4);
 	prev = *head;
 	curr = *head;
 	traverse = *head;
@@ -388,25 +388,25 @@ void sort_four(Node **lst)
 		sort_three(&stack_a);
 		ft_push_a(&stack_b, &stack_a);
 		rot(&stack_a);
-		printf("stack a\n");
-		local_lstiter(stack_a, &ft_print_node);
-		printf("stack_b\n");
-		local_lstiter(stack_b, &ft_print_node);
+		// printf("stack a\n");
+		// local_lstiter(stack_a, &ft_print_node);
+		// printf("stack_b\n");
+		// local_lstiter(stack_b, &ft_print_node);
 		return ;
 	}
-	if (stack_a->index == 2)
+	else if (stack_a->index == 2)
 	{
 		ft_push_b(&stack_a, &stack_b);
 		sort_three(&stack_a);
 		ft_push_a(&stack_b, &stack_a);
 		ft_swap_a(&stack_a);
-		printf("stack a\n");
-		local_lstiter(stack_a, &ft_print_node);
-		printf("stack_b\n");
-		local_lstiter(stack_b, &ft_print_node);
+		// printf("stack a\n");
+		// local_lstiter(stack_a, &ft_print_node);
+		// printf("stack_b\n");
+		// local_lstiter(stack_b, &ft_print_node);
 		return ;
 	}
-		if (stack_a->index == 3)
+	else if (stack_a->index == 3)
 	{
 		ft_push_b(&stack_a, &stack_b);
 		sort_three(&stack_a);
@@ -414,21 +414,21 @@ void sort_four(Node **lst)
 		ft_push_a(&stack_b, &stack_a);
 		rot(&stack_a);
 		rot(&stack_a);
-		printf("stack a\n");
-		local_lstiter(stack_a, &ft_print_node);
-		printf("stack_b\n");
-		local_lstiter(stack_b, &ft_print_node);
+		// printf("stack a\n");
+		// local_lstiter(stack_a, &ft_print_node);
+		// printf("stack_b\n");
+		// local_lstiter(stack_b, &ft_print_node);
 		return ;
 	}
-	if (stack_a->index == 1)
+	else if (stack_a->index == 1)
 	{
 		ft_push_b(&stack_a, &stack_b);
 		sort_three(&stack_a);
 		ft_push_a(&stack_b, &stack_a);
-		printf("stack a\n");
-		local_lstiter(stack_a, &ft_print_node);
-		printf("stack_b\n");
-		local_lstiter(stack_b, &ft_print_node);
+		// printf("stack a\n");
+		// local_lstiter(stack_a, &ft_print_node);
+		// printf("stack_b\n");
+		// local_lstiter(stack_b, &ft_print_node);
 		return ;
 	}
 }
