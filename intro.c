@@ -6,10 +6,9 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/02 18:52:53 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/05 19:32:24 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 //needs an is sorted function
 //needs cases when to use functions with most sorting prowess
@@ -23,6 +22,9 @@
 // follow the tutorial with the bucket sort 
 // use index for 4 and 5
 // push b is to be fixed
+// sort descending in b
+// divide by index 2
+// sort by chunks and divide
 
 #include "./libft/libft.h"
 #include "push_swap.h"
@@ -31,7 +33,141 @@
 #include "linkedlistmerge.c"
 
 void positions(Node **stack);
-void	local_lstiter(Node *lst, void (*f)(int, int, int));
+// void	local_lstiter(Node *lst, void (*f)(int, int, int));
+void	local_lstiter(Node *lst, void (*f)(int));
+int find_mid(Node **lst);
+//int b_sort(Node *lst);
+void big_sort (Node **lst);
+void ft_push_b(Node **stack_a, Node **stack_b);
+void rot(Node **head);
+void rev_rot(Node **head);
+// void ft_print_node(int content, int index, int position);
+void ft_print_node(int content);
+Node	*ft_lstnew_pl(int content, int index, int position, int chonk_size);
+// Node	*ft_lstnew_pl(int content);
+void	local_lstadd_back(Node **lst, Node *new);
+
+Node	*ft_lstnew_pl(int content, int index, int position, int chonk_size)
+{
+	Node	*tmp;
+
+	tmp = (Node *)malloc(sizeof(Node));
+	if (!tmp)
+		return (NULL);
+	if (tmp)
+	{
+		tmp->content = content;
+		tmp->position = position;
+		tmp->index = index;
+		tmp->chonk_size = chonk_size;
+		tmp->next = NULL;
+	}
+	return (tmp);
+}
+
+int find_mid(Node **lst)
+{
+	Node	*find_last;
+	Node	*sorted;
+	int	i;
+	
+	sorted = NULL;
+	while(*lst)
+	{
+		local_lstadd_back(&sorted, ft_lstnew_pl((*lst)->content, (*lst)->index, (*lst)->position, (*lst)->chonk_size));
+		(*lst) = (*lst)->next;
+	}
+
+	MergeSort(&sorted);
+	find_last = sorted;
+	i = 0;
+	while(find_last != NULL)
+	{
+		find_last = find_last->next;
+		i++;
+	}
+	find_last = sorted;
+	
+	i = i / 2;
+	while(1)
+	{
+		if(i == 0)
+			break;
+		i--;
+		find_last = find_last->next;
+	}
+	return (find_last->index);
+	// return (find_last->content);
+}
+
+int ft_chonk_size(Node **lst)
+{
+	int	i;
+	Node	*find_last;
+	
+	find_last = *lst;
+	i = 0;
+	while(find_last != NULL)
+	{
+		i++;
+		// printf("i = %d", i);
+		find_last = find_last->next;
+	}
+	find_last = *lst;
+	return (i / 2);
+}
+
+void big_sort (Node **lst)
+{
+	int i;
+	int		chonk_size;
+	Node	*stack_a;
+	Node	*stack_b;
+	Node	*kite;
+	// Node	*jupiter;
+	
+	stack_a = *lst;
+	stack_b = NULL;
+	// jupiter = *lst;
+	
+	i = find_mid(lst);
+	// local_lstiter(stack_a, &ft_print_node);
+	chonk_size = ft_chonk_size(&stack_a);
+	printf("midpoint = %d\n", i);
+	printf("chonk_size = %d\n", chonk_size);
+	// write(1, "toto", 4);
+	while(chonk_size != 0)
+	{
+		if (stack_a->index < i)
+		{
+			ft_push_b(&stack_a, &stack_b);
+			chonk_size--;
+		}
+		// return ;
+		else
+		{
+			kite = stack_a;
+			while(kite->next != NULL)
+				{
+					kite = kite->next;
+				}
+			if(kite->index < i)
+				{
+					rev_rot(&stack_a);
+					ft_push_b(&stack_a, &stack_b);
+					chonk_size--;
+				}
+			else
+			{
+				rot(&stack_a);
+			}
+		}
+	}
+	printf("-----------stack a--------------\n");
+	local_lstiter(stack_a, &ft_print_node);
+	printf("-----------stack b--------------\n");
+	local_lstiter(stack_b, &ft_print_node);
+}
 
 Node * insert(Node *head, int data)
 {
@@ -62,11 +198,12 @@ Node * insert(Node *head, int data)
 	return (head);
 }
 
-void ft_print_node(int content, int index, int position)
+void ft_print_node(int content)
+// void ft_print_node(int content, int index, int position)
 {
 	printf ("%d\n", content);
-	printf ("%d\n", index);
-	printf ("%d\n", position);
+	// printf ("%d\n", index);
+	// printf ("%d\n", position);
 }
 
 void delete (char * content)
@@ -130,7 +267,8 @@ void ft_swap_b(Node	**head)
 	write(1, "sb\n", 3);
 	currX = *head;
 	currY = *head;
-    if (currX == NULL || currY == NULL || currY->next == NULL || currX->next == NULL)
+    if (currX == NULL || currY == NULL ||
+	currY->next == NULL || currX->next == NULL)
         return;
     currY = currY->next;
 	temp = currY->next;
@@ -221,14 +359,15 @@ Node	*ft_lstnew_int(int content)
 	return (tmp);
 }
 
-void	local_lstiter(Node *lst, void (*f)(int, int, int))
+void	local_lstiter(Node *lst, void (*f)(int))
+// void	local_lstiter(Node *lst, void (*f)(int, int, int))
 {
 	Node	*point_to_shift;
 
 	point_to_shift = lst;
 	while (point_to_shift)
 	{
-		(*f)(point_to_shift->content, point_to_shift->index, point_to_shift->position);
+		(*f)(point_to_shift->content);
 		point_to_shift = point_to_shift->next;
 	}
 }
@@ -719,6 +858,7 @@ int	main(int ac, char **av)
 		local_lstadd_back(&sorted, ft_lstnew_int(ft_atoi(av[i])));
 		i++;
 	}
+
 	indexes(&stack_a);
 	MergeSort(&sorted);
 	indexes(&sorted);
@@ -728,14 +868,16 @@ int	main(int ac, char **av)
 	// local_lstiter(insert(stack_a, 11), &ft_print_node);
 
 	// local_lstiter(ft_lis(&stack_a, ac - 1), &ft_print_node);
-	if (ac == 3)
-		sort_two(stack_a);
-	if (ac == 4)
-		sort_three(&stack_a);
-	if (ac == 5)
-		sort_four(&stack_a);
-	if (ac == 6)
-		sort_five(&stack_a);
+	// if (ac == 3)
+	// 	sort_two(stack_a);
+	// if (ac == 4)
+	// 	sort_three(&stack_a);
+	// if (ac == 5)
+	// 	sort_four(&stack_a);
+	// if (ac == 6)
+	// 	sort_five(&stack_a);
+	// if (ac > 6)
+		big_sort(&stack_a);
 	// local_lstiter(stack_a, &ft_print_node);
 	// printf("Before rrot_a:\n");
 	// local_lstiter(stack_a, &ft_print_node);
