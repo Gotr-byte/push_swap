@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intro.c                                            :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/06 10:57:51 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/06 11:54:50 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,43 +200,44 @@ void big_sort (Node **lst, Node **lst_b, int len_init, int mode)
 		}
 		big_sort(&stack_b, &stack_a, len_init, mode);
 	}
-	else if (Nodes_count(&stack_a) > 2 && mode == -1)
-	{	
-		while(chonk_size != 0)
-		{
-			if (stack_a->index > i)
-			{
-				ft_push_a(&stack_b, &stack_a);
-				chonk_size--;
-			}
-			// return ;
-			else
-			{
-				kite = stack_a;
-				while(kite->next != NULL)
-					{
-						kite = kite->next;
-					}
-				printf ("kite->index: %d", kite->index);
-				if(kite->index > i)
-					{
-						rev_rot_b(&stack_a);
-						ft_push_a(&stack_b, &stack_a);
-						chonk_size--;
-					}
-				else
-				{
-					rot_b(&stack_a);
-				}
-			}
-		}
-		big_sort(&stack_b, &stack_a, len_init, mode);
-	}
+	// else if (Nodes_count(&stack_a) > 2 && mode == -1)
+	// {	
+	// 	while(chonk_size != 0)
+	// 	{
+	// 		if (stack_a->index > i)
+	// 		{
+	// 			ft_push_a(&stack_b, &stack_a);
+	// 			chonk_size--;
+	// 		}
+	// 		// return ;
+	// 		else
+	// 		{
+	// 			kite = stack_a;
+	// 			while(kite->next != NULL)
+	// 				{
+	// 					kite = kite->next;
+	// 				}
+	// 			printf ("kite->index: %d", kite->index);
+	// 			if(kite->index > i)
+	// 				{
+	// 					rev_rot_b(&stack_a);
+	// 					ft_push_a(&stack_b, &stack_a);
+	// 					chonk_size--;
+	// 				}
+	// 			else
+	// 			{
+	// 				rot_b(&stack_a);
+	// 			}
+	// 		}
+	// 	}
+	// 	big_sort(&stack_b, &stack_a, len_init, mode);
+	// }
 	else if (Nodes_count(&stack_a) == 2 && mode == 1)
 	{
 		sort_two(&stack_a);
 		mode = mode * -1;
 		printf("%d", mode);
+		return;
 		big_sort(&stack_b, &stack_a, len_init, mode);
 	}
 		if (Nodes_count(&stack_a) == 2 && mode == -1)
@@ -244,6 +245,7 @@ void big_sort (Node **lst, Node **lst_b, int len_init, int mode)
 		sort_two_b(&stack_a);
 		mode = mode * -1;
 		printf("%d", mode);
+		return ;
 		big_sort(&stack_b, &stack_a, len_init, mode);
 	}
 

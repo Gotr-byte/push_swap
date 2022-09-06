@@ -1,7 +1,7 @@
 NAME := push_swap
 LIBFT_DIR = libft/
 LIBFT_EXEC = ./libft/libft.a
-SRCFILES := intro.c
+SRCFILES := push_swap.c
 CC = gcc
 CFLAGS = -Wextra -Werror -Wall
 OBJS := $(SRCFILES:.c=.o) 
