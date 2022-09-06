@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/05 19:32:24 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/06 10:57:51 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 // sort descending in b
 // divide by index 2
 // sort by chunks and divide
+// Nums to test 2 3 5 12 10 6 9 7 4 1 8 11
+// is antisorted needed
+// number of chunks behaviour pattern is needed
 
 #include "./libft/libft.h"
 #include "push_swap.h"
@@ -37,15 +40,41 @@ void positions(Node **stack);
 void	local_lstiter(Node *lst, void (*f)(int));
 int find_mid(Node **lst);
 //int b_sort(Node *lst);
-void big_sort (Node **lst);
+// void big_sort (Node **lst);
+// void big_sort (Node **lst, Node **lst_b);
+void big_sort (Node **lst, Node **lst_b, int len_init, int mode);
 void ft_push_b(Node **stack_a, Node **stack_b);
 void rot(Node **head);
+void rot_b(Node **head);
 void rev_rot(Node **head);
 // void ft_print_node(int content, int index, int position);
 void ft_print_node(int content);
 Node	*ft_lstnew_pl(int content, int index, int position, int chonk_size);
 // Node	*ft_lstnew_pl(int content);
 void	local_lstadd_back(Node **lst, Node *new);
+int	Nodes_count (Node **lst);
+int is_sorted(Node **stack);
+void sort_two(Node **lst);
+void sort_two_b(Node **lst);
+void ft_swap_b(Node	**head);
+void ft_push_a(Node **stack_a, Node **stack_b);
+void rev_rot_b(Node **head);
+
+int	Nodes_count(Node **lst)
+{
+	Node *to_count;
+	int		i;
+
+	to_count = *lst;
+	i = 0;
+	while (to_count)
+	{
+		to_count = to_count->next;
+		i++;
+	}
+	return (i);
+}
+
 
 Node	*ft_lstnew_pl(int content, int index, int position, int chonk_size)
 {
@@ -117,86 +146,139 @@ int ft_chonk_size(Node **lst)
 	return (i / 2);
 }
 
-void big_sort (Node **lst)
+void big_sort (Node **lst, Node **lst_b, int len_init, int mode)
 {
 	int i;
 	int		chonk_size;
 	Node	*stack_a;
 	Node	*stack_b;
 	Node	*kite;
-	// Node	*jupiter;
+	// int		signal_tower;
 	
+	// signal_tower = 0;
 	stack_a = *lst;
-	stack_b = NULL;
+	stack_b = *lst_b;
 	// jupiter = *lst;
 	
 	i = find_mid(lst);
 	// local_lstiter(stack_a, &ft_print_node);
 	chonk_size = ft_chonk_size(&stack_a);
-	printf("midpoint = %d\n", i);
+	// printf("midpoint = %d\n", i);
 	printf("chonk_size = %d\n", chonk_size);
-	// write(1, "toto", 4);
-	while(chonk_size != 0)
-	{
-		if (stack_a->index < i)
+	// printf("Nodes count: %d", Nodes_count(&stack_a));
+	if(is_sorted(&stack_a) && Nodes_count(&stack_a) == len_init)
+		return ;
+	if (Nodes_count(&stack_a) > 2 && mode == 1)
+	{	
+		while(chonk_size != 0)
 		{
-			ft_push_b(&stack_a, &stack_b);
-			chonk_size--;
-		}
-		// return ;
-		else
-		{
-			kite = stack_a;
-			while(kite->next != NULL)
-				{
-					kite = kite->next;
-				}
-			if(kite->index < i)
-				{
-					rev_rot(&stack_a);
-					ft_push_b(&stack_a, &stack_b);
-					chonk_size--;
-				}
+			if (stack_a->index < i)
+			{
+				ft_push_b(&stack_a, &stack_b);
+				chonk_size--;
+			}
+			// return ;
 			else
 			{
-				rot(&stack_a);
+				kite = stack_a;
+				while(kite->next != NULL)
+					{
+						kite = kite->next;
+					}
+				printf ("kite->index: %d", kite->index);
+				if(kite->index < i)
+					{
+						rev_rot(&stack_a);
+						ft_push_b(&stack_a, &stack_b);
+						chonk_size--;
+					}
+				else
+				{
+					rot(&stack_a);
+				}
 			}
 		}
+		big_sort(&stack_b, &stack_a, len_init, mode);
 	}
-	printf("-----------stack a--------------\n");
-	local_lstiter(stack_a, &ft_print_node);
-	printf("-----------stack b--------------\n");
-	local_lstiter(stack_b, &ft_print_node);
+	else if (Nodes_count(&stack_a) > 2 && mode == -1)
+	{	
+		while(chonk_size != 0)
+		{
+			if (stack_a->index > i)
+			{
+				ft_push_a(&stack_b, &stack_a);
+				chonk_size--;
+			}
+			// return ;
+			else
+			{
+				kite = stack_a;
+				while(kite->next != NULL)
+					{
+						kite = kite->next;
+					}
+				printf ("kite->index: %d", kite->index);
+				if(kite->index > i)
+					{
+						rev_rot_b(&stack_a);
+						ft_push_a(&stack_b, &stack_a);
+						chonk_size--;
+					}
+				else
+				{
+					rot_b(&stack_a);
+				}
+			}
+		}
+		big_sort(&stack_b, &stack_a, len_init, mode);
+	}
+	else if (Nodes_count(&stack_a) == 2 && mode == 1)
+	{
+		sort_two(&stack_a);
+		mode = mode * -1;
+		printf("%d", mode);
+		big_sort(&stack_b, &stack_a, len_init, mode);
+	}
+		if (Nodes_count(&stack_a) == 2 && mode == -1)
+	{
+		sort_two_b(&stack_a);
+		mode = mode * -1;
+		printf("%d", mode);
+		big_sort(&stack_b, &stack_a, len_init, mode);
+	}
+
+	// write(1, "toto", 4);
+	
 }
 
-Node * insert(Node *head, int data)
-{
-	Node* temp;
-	Node *newP;
-	int key;
+// Node * insert(Node *head, int data)
+// {
+// 	Node* temp;
+// 	Node *newP;
+// 	int key;
 	
-	newP = malloc(sizeof(Node));
-	newP->content = data;
-	newP->next= NULL;
-	key = data;	
+// 	newP = malloc(sizeof(Node));
+// 	newP->content = data;
+// 	newP->next= NULL;
+// 	key = data;	
 	
-	if (head == NULL || key < head->content)
-	{
-		newP->next = head;
-		head = newP;
-	}
-	else
-	{
-		temp = head;
-		while (temp->next != NULL && temp->next->content < key)
-		{
-			temp = temp->next;
-		}
-		newP->next = temp->next;
-		temp->next = newP;
-	}
-	return (head);
-}
+// 	if (head == NULL || key < head->content)
+// 	{
+// 		newP->next = head;
+// 		head = newP;
+// 	}
+// 	else
+// 	{
+// 		temp = head;
+// 		while (temp->next != NULL && temp->next->content < key)
+// 		{
+// 			temp = temp->next;
+// 		}
+// 		newP->next = temp->next;
+// 		temp->next = newP;
+// 	}
+// 	return (head);
+// }
 
 void ft_print_node(int content)
 // void ft_print_node(int content, int index, int position)
@@ -420,6 +502,24 @@ void rot(Node **head)
 	*head = traverse;
 }
 
+void rot_b(Node **head)
+{
+	Node	*prev;
+	Node	*curr;
+	Node	*traverse;
+
+	write(1, "rb\n", 3);
+	prev = *head;
+	curr = *head;
+	traverse = *head;
+	traverse = traverse->next;
+	prev = local_lstlast(prev);
+	prev->next = curr;
+	curr->next = NULL;
+	*head = traverse;
+}
+
+
 void rev_rot(Node **head)
 {
 	Node	*prev;
@@ -437,11 +537,28 @@ void rev_rot(Node **head)
 	*head = traverse;
 }
 
-void sort_two(Node *lst)
+void rev_rot_b(Node **head)
+{
+	Node	*prev;
+	Node	*curr;
+	Node	*traverse;
+
+	write(1, "rrb\n", 4);
+	prev = *head;
+	curr = *head;
+	traverse = *head;
+	traverse = local_lstlast(traverse);
+	prev = local_lst_bef_last(prev);
+	prev->next = NULL;
+	traverse->next = curr;
+	*head = traverse;
+}
+
+void sort_two(Node **lst)
 {
 	Node	*point_to_shift;
 	
-	point_to_shift = lst;
+	point_to_shift = *lst;
 	int	a;
 	int b;
 
@@ -457,7 +574,7 @@ void sort_two(Node *lst)
 	}
 	if (a > b)
 	{
-		ft_swap_a(&lst);
+		ft_swap_a(lst);
 		// local_lstiter(lst, &ft_print_node);
 		// printf("Hi! It is all sorted :)\n");
 	}
@@ -699,13 +816,13 @@ void sort_five(Node **lst)
 	ft_push_a(&stack_b, &stack_a);	
 }
 // sort four can use the indexing for the first element which would be pushed to b then
-char *is_sorted(Node **stack)
+int is_sorted(Node **stack)
 {
 	Node	*i;
 	Node	*j;
-	char*	sort_flag;
+	int		sort_flag;
 	
-	sort_flag = "sorted";
+	sort_flag = 1;
 	i = (*stack);
 	j = (*stack);
 	j = j->next;
@@ -714,11 +831,11 @@ char *is_sorted(Node **stack)
 	{
 		if(j->content == i->content)
 		{
-			sort_flag = "equals";
+			sort_flag = 2;
 			break ;
 		}
 		if(j->content < i->content)
-			sort_flag = "unsorted";
+			sort_flag = 0;
 		if(j->next == NULL)
 			break ;
 		j = j->next;
@@ -786,57 +903,57 @@ void con_to_index(Node **lst_con, Node **lst_i)
 }
 
 // Node *ft_lis (int n)
-Node *ft_lis (Node** lst, int n)
-{
-	Node 	*lis;
-	Node	*first;
-	Node	*second;
-	Node	*traverse;
-	Node	*traverse_next;
-    int i;
-	int j;
+// Node *ft_lis (Node** lst, int n)
+// {
+// 	Node 	*lis;
+// 	Node	*first;
+// 	Node	*second;
+// 	Node	*traverse;
+// 	Node	*traverse_next;
+//     int i;
+// 	int j;
 
-    i = 0;
-	lis = NULL;
-	while (i < n)
-		{
-			local_lstadd_back(&lis, ft_lstnew_int(1));
-			i++;
-		}
+//     i = 0;
+// 	lis = NULL;
+// 	while (i < n)
+// 		{
+// 			local_lstadd_back(&lis, ft_lstnew_int(1));
+// 			i++;
+// 		}
 
-	first = *lst;
-	second = *lst;
-	second = second->next;
-	traverse = lis;
-	traverse_next = lis;
-	traverse_next = traverse_next->next;
-    j = 0;
-    i = 1;
+// 	first = *lst;
+// 	second = *lst;
+// 	second = second->next;
+// 	traverse = lis;
+// 	traverse_next = lis;
+// 	traverse_next = traverse_next->next;
+//     j = 0;
+//     i = 1;
 
-    while (i < n)
-    {
-	j = 0;
-	first = *lst;
-	traverse = lis;
+//     while (i < n)
+//     {
+// 	j = 0;
+// 	first = *lst;
+// 	traverse = lis;
 	
-        while (j < i)
-        {
-            if((second->content > first->content) && (traverse_next->content < traverse->content + 1))
-            {
-				traverse_next->content = traverse->content + 1;
-				//subs++ the subsequence should increment
-				//managing the chonks
-            }
-			first = first->next;
-			traverse = traverse->next;
-            j++;
-        }
-			second = second->next;
-			traverse_next = traverse_next->next;
-        	i++;
-    }
-	return (lis);
-}
+//         while (j < i)
+//         {
+//             if((second->content > first->content) && (traverse_next->content < traverse->content + 1))
+//             {
+// 				traverse_next->content = traverse->content + 1;
+// 				//subs++ the subsequence should increment
+// 				//managing the chonks
+//             }
+// 			first = first->next;
+// 			traverse = traverse->next;
+//             j++;
+//         }
+// 			second = second->next;
+// 			traverse_next = traverse_next->next;
+//         	i++;
+//     }
+// 	return (lis);
+// }
 
 int	main(int ac, char **av)
 // int main(void)
@@ -845,13 +962,16 @@ int	main(int ac, char **av)
 	// {
 	Node 	*stack_a;
 	Node	*sorted;
+	Node	*stack_b;
 	int		i;
+	int		mode;
 
 	// write (1, "toto", 4);
 	// return (0);
 	i = 1;
 	stack_a = NULL;
 	sorted = NULL;
+	mode = 1;
 	while (i < ac)
 	{
 		local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
@@ -866,7 +986,7 @@ int	main(int ac, char **av)
 	positions(&stack_a);
 	//printf("The stack is: %s \n", is_sorted(&stack_a));
 	// local_lstiter(insert(stack_a, 11), &ft_print_node);
-
+	stack_b = NULL;
 	// local_lstiter(ft_lis(&stack_a, ac - 1), &ft_print_node);
 	// if (ac == 3)
 	// 	sort_two(stack_a);
@@ -877,7 +997,7 @@ int	main(int ac, char **av)
 	// if (ac == 6)
 	// 	sort_five(&stack_a);
 	// if (ac > 6)
-		big_sort(&stack_a);
+	big_sort(&stack_a, &stack_b, Nodes_count(&stack_a), mode);
 	// local_lstiter(stack_a, &ft_print_node);
 	// printf("Before rrot_a:\n");
 	// local_lstiter(stack_a, &ft_print_node);
