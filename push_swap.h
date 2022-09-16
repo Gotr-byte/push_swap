@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:55:43 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/06 11:45:46 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/16 12:43:05 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct Nodes
 	int				index;
 	int				position;
 	int				chonk_size;
+	int				new_chonk_size;
 	struct Nodes	*next;
 }	Node;
 #endif
