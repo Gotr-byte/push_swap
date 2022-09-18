@@ -10,38 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdio.h>
-#include<stdlib.h>
 #include "push_swap.h"
-// typedef struct Nodes{
-// 	int content;
-// 	struct Nodes* next;
-// }Node;
 
-Node *SortedMerge (Node *a, Node *b);
-void FrontBackSplit (Node *source, Node **frontRef, Node **backRef);
+t_node *SortedMerge (t_node *a, t_node *b);
+void FrontBackSplit (t_node *source, t_node **frontRef, t_node **backRef);
 
-void MergeSort(Node **headRef)
+void	mrgsort(t_node **headRef)
 {
-	Node	*head = *headRef;
-	Node	*a;
-	Node	*b;
+	t_node	*head = *headRef;
+	t_node	*a;
+	t_node	*b;
 
 	if ((head == NULL) || (head->next == NULL))
 	{
 		return ;
 	}
 	FrontBackSplit(head, &a, &b);
-
-	MergeSort(&a);
-	MergeSort(&b);
-
+	mrgsort(&a);
+	mrgsort(&b);
 	*headRef = SortedMerge(a, b);
 }
 
-Node *SortedMerge(Node *a, Node *b)
+t_node	*SortedMerge(t_node *a, t_node *b)
 {
-	Node	*result = NULL;
+	t_node	*result = NULL;
 	
 	if (a == NULL)
 		return (b);
@@ -60,10 +52,10 @@ Node *SortedMerge(Node *a, Node *b)
 	return(result);
 }
 
-void FrontBackSplit(Node *source, Node **frontRef, Node **backRef)
+void FrontBackSplit(t_node *source, t_node **frontRef, t_node **backRef)
 {
-	Node	*fast;
-	Node	*slow;
+	t_node	*fast;
+	t_node	*slow;
 
 	slow = source;
 	fast = source->next;
@@ -80,44 +72,3 @@ void FrontBackSplit(Node *source, Node **frontRef, Node **backRef)
 	*backRef = slow->next;
 	slow->next = NULL;
 }
-
-void printList(Node *node)
-{
-	while(node != NULL)
-	{
-		printf("%d \n", node->content);
-		node = node->next;
-	}
-}
-
-// void push(Node **head_ref, int new_data)
-// {
-// 	Node* new_node = (Node *)malloc(sizeof(Node));
-
-// 	new_node->content = new_data;
-// 	new_node->next = (*head_ref);
-// 	(*head_ref) = new_node;
-// }
-
-// int main()
-// {
-// 	Node *res = NULL;
-// 	Node *a = NULL;
-
-// 	push(&a, 15);
-// 	push(&a, 10);
-// 	push(&a, 5);
-// 	push(&a, 11);
-// 	push(&a, 3);
-// 	push(&a, 2);
-
-// 	MergeSort(&a);
-
-// 	printf("Sorted Linked list is \n");
-// 	printList(a);
-
-// 	getchar();
-
-// 	return (0);
-
-// }

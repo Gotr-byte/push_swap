@@ -1,7 +1,15 @@
 NAME := push_swap
 LIBFT_DIR = libft/
 LIBFT_EXEC = ./libft/libft.a
-SRCFILES := push_swap.c
+SRCFILES := push_swap.c \
+			mechanism.c \
+			mechanism_II.c \
+			linkedlistmerge.c \
+			sort_small.c \
+			sort_four.c \
+			sort_five.c \
+			sort_five_utils.c \
+			indexes.c
 CC = gcc
 CFLAGS = -Wextra -Werror -Wall
 OBJS := $(SRCFILES:.c=.o) 
