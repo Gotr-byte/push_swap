@@ -12,29 +12,29 @@
 
 #include "push_swap.h"
 
-t_node *SortedMerge (t_node *a, t_node *b);
-void FrontBackSplit (t_node *source, t_node **frontRef, t_node **backRef);
+t_node	*sortedmerge(t_node *a, t_node *b);
+void	front_back_split(t_node *source, t_node **frontRef, t_node **backRef);
 
-void	mrgsort(t_node **headRef)
+void	mrgsort(t_node **head_ref)
 {
-	t_node	*head = *headRef;
+	t_node	*head;
 	t_node	*a;
 	t_node	*b;
 
+	head = *head_ref;
 	if ((head == NULL) || (head->next == NULL))
-	{
 		return ;
-	}
-	FrontBackSplit(head, &a, &b);
+	front_back_split(head, &a, &b);
 	mrgsort(&a);
 	mrgsort(&b);
-	*headRef = SortedMerge(a, b);
+	*head_ref = sortedmerge(a, b);
 }
 
-t_node	*SortedMerge(t_node *a, t_node *b)
+t_node	*sortedmerge(t_node *a, t_node *b)
 {
-	t_node	*result = NULL;
-	
+	t_node	*result;
+
+	result = NULL;
 	if (a == NULL)
 		return (b);
 	else if (b == NULL)
@@ -42,17 +42,17 @@ t_node	*SortedMerge(t_node *a, t_node *b)
 	if (a->content <= b->content)
 	{
 		result = a;
-		result->next = SortedMerge(a->next, b);
+		result->next = sortedmerge(a->next, b);
 	}
 	else
 	{
 		result = b;
-		result->next = SortedMerge(a, b->next);
+		result->next = sortedmerge(a, b->next);
 	}
-	return(result);
+	return (result);
 }
 
-void FrontBackSplit(t_node *source, t_node **frontRef, t_node **backRef)
+void	front_back_split(t_node *source, t_node **frontRef, t_node **backRef)
 {
 	t_node	*fast;
 	t_node	*slow;
@@ -62,7 +62,7 @@ void FrontBackSplit(t_node *source, t_node **frontRef, t_node **backRef)
 	while (fast != NULL)
 	{
 		fast = fast->next;
-		if (fast !=NULL)
+		if (fast != NULL)
 		{
 			fast = fast->next;
 			slow = slow->next;

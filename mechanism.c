@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:11:26 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/17 14:46:17 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:51:32 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_push_a(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*t_node_to_push;
 
+	write (1, "pa\n", 3);
 	if (!(*stack_a))
 		return ;
 	t_node_to_push = (*stack_a);
@@ -29,13 +30,13 @@ void	ft_push_a(t_node **stack_a, t_node **stack_b)
 		(*stack_b) = t_node_to_push;
 	}
 	t_node_to_push = NULL;
-	write (1, "pa\n", 3);
 }
 
 void	ft_push_b(t_node **stack_a, t_node **stack_b)
 {
 	t_node	*t_node_to_push;
 
+	write (1, "pb\n", 3);
 	if (!(*stack_a))
 		return ;
 	t_node_to_push = (*stack_a);
@@ -49,7 +50,6 @@ void	ft_push_b(t_node **stack_a, t_node **stack_b)
 		(*stack_b) = t_node_to_push;
 	}
 	t_node_to_push = NULL;
-	write (1, "pb\n", 3);
 }
 
 void	rot(t_node **head)
