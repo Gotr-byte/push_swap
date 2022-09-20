@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:08:21 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/20 16:24:01 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:05:50 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	is_sorted(t_node **stack)
 	j = j->next;
 	while (1)
 	{
-		if (j->content == i->content)
-			return (2);
+		// if (j->content == i->content)
+		// 	return (2);
 		if (j->content < i->content)
 			sort_flag = 0;
 		if (j->next == NULL)

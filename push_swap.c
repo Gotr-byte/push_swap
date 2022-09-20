@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/20 16:54:16 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:28:15 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int ac, char **av)
 	free(sorted);
 	positions(&stack_a);
 	stack_b = NULL;
+	is_the_same(&stack_a);
 	if (is_sorted(&stack_a))
 		return (0);
 	handle(&stack_a, ac);

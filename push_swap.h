@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:55:43 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/20 16:47:58 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/20 17:25:40 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ t_node	*local_lstlast(t_node *lst);
 void	local_lstiter(t_node **lst, void (*f)(int));
 t_node	*ft_lstnew_int(int content);
 void	local_lstadd_back(t_node **lst, t_node *new);
+int		is_the_same(t_node **lst_a);
 
 #endif
