@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 16:12:37 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/21 10:25:55 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:59:24 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	sort_two(t_node **lst)
 
 void	sort_three(t_node **lst)
 {
+	t_var var;
+	
 	var.point_to_shift = *lst;
 	var.a = var.point_to_shift->content;
 	var.point_to_shift = var.point_to_shift->next;

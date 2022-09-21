@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 16:44:30 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/20 16:16:20 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:54:05 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	sort_push_push(t_node **stack_b, t_node **stack_a)
 
 void	sort_five(t_node **lst)
 {
+	t_var var;
+	
 	var.sent = 2;
 	var.stack_a = *lst;
 	var.stack_b = NULL;

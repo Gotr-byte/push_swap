@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:55:43 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/21 13:34:47 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:02:13 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct t_nodes
 	int				position;
 	struct t_nodes	*next;
 }	t_node;
-struct	s_variable_bucket
+typedef struct s_variable_bucket
 {
 	t_node	*point_to_shift;
 	int		a;
@@ -34,7 +34,7 @@ struct	s_variable_bucket
 	t_node	*stack_a;
 	t_node	*stack_b;
 	int		sent;
-}var;
+}t_var;
 
 void		ft_push_a(t_node **stack_a, t_node **stack_b);
 void		ft_push_b(t_node **stack_a, t_node **stack_b);
