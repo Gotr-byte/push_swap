@@ -6,14 +6,16 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/20 17:28:15 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:35:00 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// need an is the same error handling
-// need error handling for words instead of numbers
+//need an is the same error handling
+//need error handling for words instead of numbers
 //some arguments aren’t integers, some arguments are
 //bigger than an integer and/or there are duplicates.
+//need a cleaner function that traverses the nodes and frees them
+// the error handling should check the input av
 
 #include "./libft/libft.h"
 #include "push_swap.h"
@@ -37,8 +39,11 @@ int	main(int ac, char **av)
 	t_node	*stack_b;
 	int		i;
 
+	if (av_read(av, ac))
+		return (write(2, "Error\n", 6));
 	i = 1;
 	stack_a = NULL;
+	stack_b = NULL;
 	sorted = NULL;
 	while (i < ac)
 	{
@@ -50,14 +55,21 @@ int	main(int ac, char **av)
 	mrgsort(&sorted);
 	indexes(&sorted);
 	con_to_index(&stack_a, &sorted);
-	free(sorted);
 	positions(&stack_a);
-	stack_b = NULL;
+	// create(&stack_a, &stack_b, &sorted, av);
 	is_the_same(&stack_a);
 	if (is_sorted(&stack_a))
 		return (0);
 	handle(&stack_a, ac);
 	radix(&stack_a, &stack_b, ac - 1);
-	free(stack_a);
-	free(stack_b);
+	free_lst(sorted);
+	sorted = NULL;
+	free_lst(stack_a);
+	stack_a = NULL;
+	free_lst(stack_b);
+	stack_b = NULL;
+	// free (av);
+	// av = NULL;
+	// write(1, "1\n", 2);
+	// return (0);
 }

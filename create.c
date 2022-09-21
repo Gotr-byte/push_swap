@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 15:18:29 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/21 10:50:41 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/09/21 13:27:04 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/09/21 13:33:03 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include	"push_swap.h"
+
+void	create(t_node **a, t_node **b, t_node **sort, char **av, int ac)
 {
-	int	digit_flag;
-	digit_flag = 0;
-	if ((48 <= c) && (c <= 57))
-		digit_flag = 1;
-	return (digit_flag);
+	int i;
+
+	i = 1;
+	a = NULL;
+	b = NULL;
+	sort = NULL;
+	while (i < ac)
+	{
+		local_lstadd_back(&a, ft_lstnew_int(ft_atoi(av[i])));
+		local_lstadd_back(&sort, ft_lstnew_int(ft_atoi(av[i])));
+		i++;
+	}
+	indexes(&a);
+	mrgsort(&sort);
+	indexes(&sort);
+	con_to_index(&a, &sort);
+	positions(&a);
 }
-/*
-int	main()
-{
-	ft_isdigit('a');
-	ft_isdigit('B');
-	ft_isdigit('3');
-	ft_isdigit('9');
-	return(0);
-}
-*/

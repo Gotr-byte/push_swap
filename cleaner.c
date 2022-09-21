@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   cleaner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/25 15:18:29 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/21 10:50:41 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/09/21 12:24:39 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/09/21 13:08:13 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(int c)
+#include "push_swap.h"
+
+void	free_lst(t_node	*head)
 {
-	int	digit_flag;
-	digit_flag = 0;
-	if ((48 <= c) && (c <= 57))
-		digit_flag = 1;
-	return (digit_flag);
+	t_node	*tmp;
+
+	while (head != NULL)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp);
+	}
+	head = NULL;
 }
-/*
-int	main()
-{
-	ft_isdigit('a');
-	ft_isdigit('B');
-	ft_isdigit('3');
-	ft_isdigit('9');
-	return(0);
-}
-*/

@@ -1,22 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_long.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/27 20:42:12 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/21 10:53:18 by pbiederm         ###   ########.fr       */
+/*   Created: 2022/09/21 10:51:45 by pbiederm          #+#    #+#             */
+/*   Updated: 2022/09/21 10:52:44 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//val[0] - position of index of string without whitespace
-//val[1] - value of intefer
-//val[2] - positive negative value multiplier
-//val[3] - flag that shows there is a valid string with numbers
-
-#include "libft.h"
-#include "stdio.h"
+#include "push_swap.h"
 
 static int	ft_wh_space(char *str)
 {
@@ -30,9 +24,9 @@ static int	ft_wh_space(char *str)
 	return (i);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi_long(const char *str)
 {
-	int	val[4];
+	long int	val[4];
 
 	val[0] = ft_wh_space((char *)str);
 	val[1] = 0;
@@ -56,10 +50,3 @@ int	ft_atoi(const char *str)
 		return (val[2] * val[1]);
 	return (0);
 }
-// int    main(void)
-// {
-// 	char* test_1 = "0";
-
-// 	printf("ft_atoi(%s): %d\n", test_1, ft_atoi(test_1)) ;
-// 	printf("atoi(%s): %d\n", test_1, atoi(test_1)) ;
-// }

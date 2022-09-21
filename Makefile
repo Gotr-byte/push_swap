@@ -13,7 +13,9 @@ SRCFILES := push_swap.c \
 			radix.c \
 			mechanism_utils.c \
 			linked_list_manage.c \
-			error_handling.c
+			error_handling.c \
+			ft_atoi_long.c \
+			cleaner.c
 CC = gcc
 CFLAGS = -Wextra -Werror -Wall
 OBJS := $(SRCFILES:.c=.o) 
