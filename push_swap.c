@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 16:59:45 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:22:49 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	handle(t_node	**stack_a, t_node **stack_b, int ac)
 	t_node	*head_a;
 
 	head_a = (*stack_a);
+	// if (ac < 3)
+	// 	exit 
 	if (ac == 3)
 		sort_two(&head_a);
 	if (ac == 4)
@@ -34,7 +36,7 @@ void	handle(t_node	**stack_a, t_node **stack_b, int ac)
 	if (ac == 6)
 		sort_five(&head_a, stack_b);
 	if (ac > 6)
-		radix(stack_a, stack_b, ac - 1);
+		radix(&head_a, stack_b, ac - 1);
 	(*stack_a) = head_a;
 }
 
@@ -58,8 +60,7 @@ int	main(int ac, char **av)
 		i++;
 	}
 	indexes(&stack_a);
-	bubble_sort(&sorted, ac-1);
-	// mrgsort(&sorted);
+	bubble_sort(&sorted, ac - 1);
 	indexes(&sorted);
 	con_to_index(&stack_a, &sorted);
 	positions(&stack_a);
@@ -82,9 +83,4 @@ int	main(int ac, char **av)
 	free_lst(stack_a);
 	stack_a = NULL;
 	return (0);
-	// local_lstiter(&sorted, &ft_print_t_node);
-	// free (av);
-	// av = NULL;
-	// write(1, "1\n", 2);
-	// return (0);
 }

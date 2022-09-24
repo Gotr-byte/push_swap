@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:05:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/23 14:11:51 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:25:28 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	av_read(char **av, int ac)
 
 	i = 1;
 	j = 0;
+
 	while (i < ac)
 	{
 		while (av[i][j])
@@ -49,6 +50,8 @@ int	av_read(char **av, int ac)
 	}
 	if (plus_minus_count(av, ac))
 		return (2);
+	if (ac < 3)
+		exit(0);
 	return (0);
 }
 
