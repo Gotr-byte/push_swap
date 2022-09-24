@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 15:42:14 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:59:45 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	handle(t_node	**stack_a, t_node **stack_b, int ac)
 		sort_four(&head_a, stack_b);
 	if (ac == 6)
 		sort_five(&head_a, stack_b);
+	if (ac > 6)
+		radix(stack_a, stack_b, ac - 1);
 	(*stack_a) = head_a;
 }
 
@@ -43,7 +45,6 @@ int	main(int ac, char **av)
 	t_node	*stack_b;
 	int		i;
 
-	// printf("size of t node: %lu", sizeof(t_node));
 	if (av_read(av, ac))
 		return (write(2, "Error\n", 6));
 	i = 1;
@@ -74,7 +75,6 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	handle(&stack_a, &stack_b, ac);
-	// radix(&stack_a, &stack_b, ac - 1);
 	free_lst(sorted);
 	sorted = NULL;
 	free_lst(stack_b);

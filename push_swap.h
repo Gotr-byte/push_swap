@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:55:43 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 15:26:22 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:55:19 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int			is_limit(long int checklimit);
 long int	ft_atoi_long(const char *str);
 int			plus_minus_count(char **av, int ac);
 void		free_lst(t_node	*head);
-void		sort_four_five(t_node **lst);
 void		bubble_sort(t_node **head, int count);
 // void		handle(&stack_a, &stack_b, ac);
 void		sort_four(t_node **stack_a, t_node **stack_b);
 // void	create(t_node **a, t_node **b, t_node **sort, char **av);
+void		sort_four_five(t_node **stack_a, t_node **stack_b);
 
 #endif

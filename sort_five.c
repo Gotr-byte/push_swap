@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 16:44:30 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 15:37:25 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:55:44 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	sort_five(t_node **lst_a, t_node **lst_b)
 		else
 			rev_rot(&stack_a);
 	}
-	sort_four_five(&stack_a);
+	sort_four_five(&stack_a, &stack_b);
 	ft_push_a(&stack_a, &stack_b);
 	(*lst_a) = stack_a;
 	(*lst_b) = stack_b;
