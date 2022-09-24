@@ -2,3 +2,7 @@
 testbench
 a.out
 mem_leaks.txt
+./push_swap_tester
+./log.txt
+./push_swap.dSYM
+linkedlistmerge.c
