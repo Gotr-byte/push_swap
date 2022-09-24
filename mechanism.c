@@ -6,11 +6,9 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:11:26 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 15:13:05 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:59:11 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// in push a stack a is actually stack b
 
 #include "push_swap.h"
 
@@ -21,7 +19,7 @@ void	ft_push_b(t_node **stack_a, t_node **stack_b)
 
 	head_a = NULL;
 	head_b = NULL;
-	if(!stack_a)
+	if (!stack_a)
 		return ;
 	head_a = (*stack_a);
 	head_b = (*stack_b);
@@ -42,7 +40,7 @@ void	ft_push_a(t_node **stack_a, t_node **stack_b)
 
 	head_a = NULL;
 	head_b = NULL;
-	if(!stack_b)
+	if (!stack_b)
 		return ;
 	head_a = (*stack_a);
 	head_b = (*stack_b);

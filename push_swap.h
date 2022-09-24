@@ -6,10 +6,9 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:55:43 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 17:59:05 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:07:07 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -59,8 +58,9 @@ void		sort_two(t_node **lst);
 void		rev_rot_b(t_node **head);
 void		positions(t_node **stack);
 void		radix(t_node **lst_a, t_node **lst_b, int size);
+// void		radix(t_node **stack_a, t_node **stack_b, int size);
 void		con_to_index(t_node **lst_con, t_node **lst_i);
-t_node		*local_lstlast(t_node *lst);
+// t_node		*local_lstlast(t_node *lst);
 void		local_lstiter(t_node **lst, void (*f)(int));
 t_node		*ft_lstnew_int(int content);
 void		local_lstadd_back(t_node **lst, t_node *new);

@@ -6,3 +6,4 @@ mem_leaks.txt
 ./log.txt
 ./push_swap.dSYM
 linkedlistmerge.c
+mechanism_utils.c

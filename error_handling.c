@@ -6,30 +6,22 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:05:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 17:25:28 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:50:01 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//X  need an is the same error handling
-//X  need error handling for words instead of numbers
-//X some arguments aren’t integers, some arguments are
-//X bigger than an integer and/or there are duplicates.
-// -2,147,483,648 to 2,147,483,647
-// -0x80000000 0x7FFFFFFF
 
 #include "push_swap.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-int	av_read(char **av, int ac)
+static int	letter_err(char **av, int ac)
 {
 	int	i;
 	int	j;
 
 	i = 1;
 	j = 0;
-
 	while (i < ac)
 	{
 		while (av[i][j])
@@ -41,6 +33,15 @@ int	av_read(char **av, int ac)
 		j = 0;
 		i++;
 	}
+	return (0);
+}
+
+int	av_read(char **av, int ac)
+{
+	int	i;
+
+	if (letter_err(av, ac))
+		return (2);
 	i = 1;
 	while (i < ac)
 	{
@@ -69,7 +70,7 @@ int	is_the_same(t_node **lst_a)
 			if (compare->content == stack_a->content && \
 			compare->position != stack_a->position)
 			{
-				write (1, "Entry error: same numbers\n", 27);
+				write (1, "Error\n", 7);
 				exit (2);
 			}
 			compare = compare->next;
@@ -119,9 +120,3 @@ int	is_limit(long int checklimit)
 	else
 		return (0);
 }
-
-// int	main()
-// {
-// 	printf("Output signal: %d",is_limit(21474836));
-// 	return(is_limit(21474836));
-// }

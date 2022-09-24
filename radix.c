@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:08:21 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 17:03:42 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:16:29 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,27 @@ int	is_sorted(t_node **stack)
 
 void	radix(t_node **lst_a, t_node **lst_b, int size)
 {
-	int		i;
-	int		j;
-	t_node	*stack_a;
-	t_node	*stack_b;
+	t_var	var;
 
-	stack_a = (*lst_a);
-	stack_b = (*lst_b);
-	i = 0;
-	j = 0;
-	while (!is_sorted(&stack_a))
+	var.stack_a = (*lst_a);
+	var.stack_b = (*lst_b);
+	var.a = 0;
+	var.b = 0;
+	while (!is_sorted(&var.stack_a))
 	{
-		while (j < size)
+		while (var.b < size)
 		{
-			if ((stack_a->index >> i) & 1)
-				rot(&stack_a);
+			if ((var.stack_a->index >> var.a) & 1)
+				rot(&var.stack_a);
 			else
-				ft_push_b(&stack_a, &stack_b);
-			j++;
+				ft_push_b(&var.stack_a, &var.stack_b);
+			var.b++;
 		}
-		while (stack_b)
-			ft_push_a(&stack_a, &stack_b);
-		j = 0;
-		i++;
+		while (var.stack_b)
+			ft_push_a(&var.stack_a, &var.stack_b);
+		var.b = 0;
+		var.a++;
 	}
-	(*lst_a) = stack_a;
-	(*lst_b) = stack_b;
+	(*lst_a) = var.stack_a;
+	(*lst_b) = var.stack_b;
 }
