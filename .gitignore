@@ -1,3 +1,4 @@
 *.o
 testbench
 a.out
+mem_leaks.txt

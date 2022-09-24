@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:05:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/21 11:27:03 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/23 14:11:51 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ int	plus_minus_count(char **av, int ac)
 		j = 0;
 		i++;
 	}
-
 	return (0);
 }
 

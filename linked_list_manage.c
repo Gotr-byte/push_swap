@@ -6,15 +6,16 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:31:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/21 13:14:17 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/23 10:48:00 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// void	ft_print_t_node(int content)
-// {
-// 	printf ("%d\n", content);
-// }
 #include "push_swap.h"
+
+void	ft_print_t_node(int content)
+{
+	printf ("%d\n", content);
+}
 
 void	local_lstadd_back(t_node **lst, t_node *new)
 {
@@ -33,6 +34,7 @@ void	local_lstadd_back(t_node **lst, t_node *new)
 		last = last->next;
 	}
 	last->next = new;
+	new->next = NULL;
 	return ;
 }
 
@@ -40,7 +42,7 @@ t_node	*ft_lstnew_int(int content)
 {
 	t_node	*tmp;
 
-	tmp = (t_node *)malloc(sizeof(t_node));
+	tmp = (t_node *)ft_calloc(1, sizeof(t_node));
 	if (!tmp)
 		return (NULL);
 	if (!content)

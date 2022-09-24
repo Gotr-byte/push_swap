@@ -6,13 +6,11 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:08:21 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/20 17:05:50 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/23 19:24:59 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// needs error if two are the same
 
 int	is_sorted(t_node **stack)
 {
@@ -30,8 +28,6 @@ int	is_sorted(t_node **stack)
 	j = j->next;
 	while (1)
 	{
-		// if (j->content == i->content)
-		// 	return (2);
 		if (j->content < i->content)
 			sort_flag = 0;
 		if (j->next == NULL)
@@ -64,7 +60,7 @@ void	radix(t_node **lst_a, t_node **lst_b, int size)
 			j++;
 		}
 		while (stack_b)
-			ft_push_a(&stack_b, &stack_a);
+			ft_push_a(&stack_a, &stack_b);
 		j = 0;
 		i++;
 	}

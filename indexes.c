@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/18 20:54:16 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/20 16:14:10 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/23 10:44:42 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	indexes(t_node **stack)
 	}
 }
 
-void con_to_index(t_node **lst_con, t_node **lst_i)
+void	con_to_index(t_node **lst_con, t_node **lst_i)
 {
 	t_node	*index_t_nodes;
 	t_node	*content_t_nodes;
