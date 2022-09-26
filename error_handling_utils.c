@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 14:00:26 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/26 14:40:31 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:20:33 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	sort_flag(char **av)
 	i = 2;
 	while (av[i])
 	{
-		if (ft_atoi(av[i]) < ft_atoi(av[i - 1]))
+		if (ft_atoi(av[i]) <= ft_atoi(av[i - 1]))
 			sort_flag = 0;
 		i++;
 	}

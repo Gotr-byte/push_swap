@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 16:44:30 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 16:55:44 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:25:45 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,26 @@ void	positions(t_node **stack)
 	}
 }
 
+int	find_min(t_node **lst_a)
+{
+	int		min_i;
+	int		position;
+	t_node	*find_min_i;
+
+	min_i = 0;
+	find_min_i = *lst_a;
+	while (find_min_i)
+	{
+		if (min_i == 0 || min_i > find_min_i->index)
+		{
+			min_i = find_min_i->index;
+			position = find_min_i->position;
+		}
+		find_min_i = find_min_i->next;
+	}
+	return (position);
+}
+
 void	sort_five(t_node **lst_a, t_node **lst_b)
 {
 	t_node	*stack_a;
@@ -44,7 +64,13 @@ void	sort_five(t_node **lst_a, t_node **lst_b)
 			break ;
 		}
 		else
-			rev_rot(&stack_a);
+		{
+			if (find_min(&stack_a) == 2 || find_min(&stack_a) == 3)
+				rot(&stack_a);
+			else if (find_min(&stack_a) == 4 || find_min(&stack_a) == 5)
+				rev_rot(&stack_a);
+		}
+		positions(&stack_a);
 	}
 	sort_four_five(&stack_a, &stack_b);
 	ft_push_a(&stack_a, &stack_b);
