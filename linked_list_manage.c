@@ -6,16 +6,11 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 16:31:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/23 10:48:00 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:25:21 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_print_t_node(int content)
-{
-	printf ("%d\n", content);
-}
 
 void	local_lstadd_back(t_node **lst, t_node *new)
 {

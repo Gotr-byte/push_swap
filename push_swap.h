@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 15:55:43 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/26 13:29:11 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:39:02 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_variable_bucket
 	t_node	*stack_a;
 	t_node	*stack_b;
 	int		sent;
-}t_var;
+}	t_var;
 
 void		ft_print_t_node(int content);
 void		ft_push_b(t_node **stack_a, t_node **stack_b);
@@ -42,7 +42,6 @@ void		rot_b(t_node **head);
 void		rev_rot(t_node **head);
 void		ft_swap_a(t_node	**head);
 t_node		*local_lstlast(t_node *lst);
-void		mrgsort(t_node **headRef);
 void		sort_two(t_node **lst);
 void		sort_three(t_node **lst);
 void		sort_five(t_node **lst_a, t_node **lst_b);
@@ -53,7 +52,6 @@ void		rot_b(t_node **head);
 void		rev_rot(t_node **head);
 t_node		*ft_lstnew_pl(int content, int index, int position);
 void		local_lstadd_back(t_node **lst, t_node *new);
-int			is_sorted(t_node **stack);
 void		sort_two(t_node **lst);
 void		rev_rot_b(t_node **head);
 void		positions(t_node **stack);
@@ -73,5 +71,6 @@ void		sort_four(t_node **stack_a, t_node **stack_b);
 void		sort_four_five(t_node **stack_a, t_node **stack_b);
 t_node		*ft_lstnew_push(int content, int index, int position);
 void		local_lstadd_front(t_node **lst, t_node *new);
+int			sort_flag(char **av);
 
 #endif

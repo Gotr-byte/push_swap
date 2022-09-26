@@ -24,7 +24,6 @@ LIBFT_EXEC = ./libft/libft.a
 SRCFILES := push_swap.c \
 			mechanism.c \
 			mechanism_II.c \
-			linkedlistmerge.c \
 			sort_small.c \
 			sort_four.c \
 			sort_five.c \
@@ -36,7 +35,8 @@ SRCFILES := push_swap.c \
 			error_handling.c \
 			ft_atoi_long.c \
 			cleaner.c \
-			bubble_sort.c
+			bubble_sort.c \
+			error_handling_utils.c
 CC = gcc
 CFLAGS = -Wextra -Werror -Wall
 OBJS := $(SRCFILES:.c=.o) 

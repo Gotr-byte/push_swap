@@ -3,6 +3,7 @@ testbench
 a.out
 mem_leaks.txt
 log.txt
-./push_swap.dSYM
+push_swap.dSYM
 linkedlistmerge.c
 mechanism_utils.c
+push_swap_tester

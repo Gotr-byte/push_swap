@@ -6,16 +6,9 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 08:52:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 18:46:06 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:14:56 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//need an is the same error handling
-//need error handling for words instead of numbers
-//some arguments aren’t integers, some arguments are
-//bigger than an integer and/or there are duplicates.
-//need a cleaner function that traverses the nodes and frees them
-// the error handling should check the input av
 
 #include "./libft/libft.h"
 #include "push_swap.h"
@@ -48,9 +41,6 @@ int	main(int ac, char **av)
 	if (av_read(av, ac))
 		return (write(2, "Error\n", 6));
 	i = 1;
-	stack_a = NULL;
-	stack_b = NULL;
-	sorted = NULL;
 	while (i < ac)
 	{
 		local_lstadd_back(&stack_a, ft_lstnew_int(ft_atoi(av[i])));
@@ -58,16 +48,6 @@ int	main(int ac, char **av)
 		i++;
 	}
 	indexes(&stack_a);
-	if (is_sorted(&stack_a))
-	{
-		free_lst(sorted);
-		sorted = NULL;
-		free_lst(stack_b);
-		stack_b = NULL;
-		free_lst(stack_a);
-		stack_a = NULL;
-		return (0);
-	}
 	bubble_sort(&sorted, ac - 1);
 	indexes(&sorted);
 	con_to_index(&stack_a, &sorted);
@@ -75,10 +55,7 @@ int	main(int ac, char **av)
 	is_the_same(&stack_a);
 	handle(&stack_a, &stack_b, ac);
 	free_lst(sorted);
-	sorted = NULL;
 	free_lst(stack_b);
-	stack_b = NULL;
 	free_lst(stack_a);
-	stack_a = NULL;
 	return (0);
 }

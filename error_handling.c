@@ -6,14 +6,11 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 17:05:32 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 18:50:01 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:25:11 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 static int	letter_err(char **av, int ac)
 {
@@ -52,6 +49,8 @@ int	av_read(char **av, int ac)
 	if (plus_minus_count(av, ac))
 		return (2);
 	if (ac < 3)
+		exit(0);
+	if (sort_flag(av) == 1)
 		exit(0);
 	return (0);
 }
