@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 14:11:26 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 18:59:11 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:29:58 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,27 @@
 
 void	ft_push_b(t_node **stack_a, t_node **stack_b)
 {
-	t_node	*head_a;
-	t_node	*head_b;
+	t_node	*tmp;
 
-	head_a = NULL;
-	head_b = NULL;
-	if (!stack_a)
-		return ;
-	head_a = (*stack_a);
-	head_b = (*stack_b);
-	if (head_a->next != NULL)
-		head_a = (*stack_a)->next;
-	(*stack_a)->next = (*stack_b);
-	(*stack_b) = (*stack_a);
-	(*stack_a) = head_a;
-	head_a = NULL;
-	head_b = NULL;
+	local_lstadd_front(stack_b, \
+	ft_lstnew_push((*stack_a)->content, \
+	(*stack_a)->index, (*stack_a)->position));
+	tmp = *stack_a;
+	*stack_a = (*stack_a)->next;
+	free(tmp);
 	write(1, "pb\n", 3);
 }
 
 void	ft_push_a(t_node **stack_a, t_node **stack_b)
 {
-	t_node	*head_a;
-	t_node	*head_b;
+	t_node	*tmp;
 
-	head_a = NULL;
-	head_b = NULL;
-	if (!stack_b)
-		return ;
-	head_a = (*stack_a);
-	head_b = (*stack_b);
-	if (head_a->next != NULL)
-		head_b = (*stack_b)->next;
-	(*stack_b)->next = (*stack_a);
-	(*stack_a) = (*stack_b);
-	(*stack_b) = head_b;
-	head_a = NULL;
-	head_b = NULL;
+	local_lstadd_front(stack_a, \
+	ft_lstnew_push((*stack_b)->content, \
+	(*stack_b)->index, (*stack_b)->position));
+	tmp = *stack_b;
+	*stack_b = (*stack_b)->next;
+	free(tmp);
 	write(1, "pa\n", 3);
 }
 

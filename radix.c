@@ -6,7 +6,7 @@
 /*   By: pbiederm <pbiederm@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:08:21 by pbiederm          #+#    #+#             */
-/*   Updated: 2022/09/24 19:16:29 by pbiederm         ###   ########.fr       */
+/*   Updated: 2022/09/26 13:24:11 by pbiederm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	radix(t_node **lst_a, t_node **lst_b, int size)
 				ft_push_b(&var.stack_a, &var.stack_b);
 			var.b++;
 		}
-		while (var.stack_b)
+		while (var.stack_b != NULL)
 			ft_push_a(&var.stack_a, &var.stack_b);
 		var.b = 0;
 		var.a++;
