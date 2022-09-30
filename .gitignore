@@ -1,8 +1,0 @@
-*.o
-testbench
-a.out
-mem_leaks.txt
-log.txt
-push_swap.dSYM
-linkedlistmerge.c
-push_swap_tester
